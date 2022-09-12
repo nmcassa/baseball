@@ -14,7 +14,6 @@ class Team:
 		self.name = self.get_name(page)
 		self.win_to_loss = self.get_win_to_loss(page)
 		self.home_vs_road = self.get_home_vs_road(s_page)
-		self.isGameDay = self.get_game_day()
 
 	def get_parsed_page(self, url: str) -> None:
 		headers = {
@@ -51,13 +50,6 @@ class Team:
 		data = page.find("span", {"class": ["header_end"], }).find_previous_sibling("span").text
 
 		return data
-
-	def get_game_day(self) -> bool:
-		teams = get_all_game_days()
-
-		if self.abbreviation in teams:
-			return True
-		return False
 
 def get_active_players(team: Team) -> str:
 	page = team.get_parsed_page(team.url)

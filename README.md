@@ -29,5 +29,10 @@ The game class currently only fetches the urls for all games that are to play th
 ```
 
 TODO in game.py:
- grab statistics from these urls
- create a game object with those stats
+- grab statistics from these urls
+  - eras
+  - teams
+  - stadium
+  - RSA
+  - past 10 games
+- create a game object with those stats

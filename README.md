@@ -22,17 +22,23 @@ TODO in team.py:
 
 ## game.py
 
-The game class currently only fetches the urls for all games that are to play that day. 
+The game class currently only fetches the urls for all games then creates a basic game object that contains this:  
 
-```python
-['/previews/2022/MIA202209121.shtml', '/previews/2022/CLE202209120.shtml', '/previews/2022/CIN202209120.shtml', '/previews/2022/DET202209120.shtml', '/previews/2022/TOR202209120.shtml', '/previews/2022/MIA202209122.shtml', '/previews/2022/NYN202209120.shtml', '/previews/2022/ARI202209120.shtml', '/previews/2022/SFN202209120.shtml']
+```json
+{
+    "url": "/previews/2022/SFN202209130.shtml",
+    "home_team": "Atlanta Braves",
+    "home_abb": "ATL",
+    "away_team": "San Francisco Giants",
+    "away_abb": "SFG"
+}
 ```
 
 TODO in game.py:
-- grab statistics from these urls
+- grab statistics 
   - eras
   - teams
   - stadium
   - RSA
   - past 10 games
-- create a game object with those stats
+- improve game object with those stats

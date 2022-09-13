@@ -8,12 +8,15 @@ class Team:
 	def __init__(self, abbreviation: str) -> None:
 		self.abbreviation = abbreviation
 		self.url = "https://www.baseball-reference.com/teams/" + self.abbreviation + "/2022.shtml"
-		page = self.get_parsed_page(self.url)
 		s_page = self.get_parsed_page("https://www.baseball-reference.com/teams/" + self.abbreviation + "/2022-schedule-scores.shtml")
+		page = self.get_parsed_page(self.url)
 
-		self.name = self.get_name(page)
-		self.win_to_loss = self.get_win_to_loss(page)
-		self.home_vs_road = self.get_home_vs_road(s_page)
+		self.build(page, s_page)
+
+	def build(self, page: None, s_page: None) -> None:
+		self.get_name(page)
+		self.get_win_to_loss(page)
+		self.get_home_vs_road(s_page)
 
 	def get_parsed_page(self, url: str) -> None:
 		headers = {
@@ -33,9 +36,9 @@ class Team:
 		data = data.split(",")[0].split("-")
 		per = int(data[0]) / (int(data[0]) + int(data[1]))
 
-		return per
+		self.win_to_loss = per
 
-	def get_home_vs_road(self, page: None) -> tuple:
+	def get_home_vs_road(self, page: None) -> None:
 		data = page.find("div", {"id": "win_loss_sh"}).next_sibling
 
 		data = BeautifulSoup(data, "html.parser")
@@ -43,13 +46,12 @@ class Team:
 		home = data.find("td", text = "Home").parent.findChildren()[5].text
 		away = data.find("td", text = "Road").parent.findChildren()[5].text
 
+		self.home_vs_road = (home, away)
 
-		return (home, away)
-
-	def get_name(self, page: None) -> str:
+	def get_name(self, page: None) -> None:
 		data = page.find("span", {"class": ["header_end"], }).find_previous_sibling("span").text
 
-		return data
+		self.name = data
 
 def get_active_players(team: Team) -> str:
 	page = team.get_parsed_page(team.url)

@@ -7,7 +7,20 @@ from json import JSONEncoder
 
 class Game: 
 	def __init__(self, url: str) -> None:
-		print("non")
+		self.url = url
+		page = get_parsed_page("https://www.baseball-reference.com" + self.url)
+
+		self.build(page)
+
+	def build(self, page: None) -> None:
+		self.get_teams(page)
+
+	def get_teams(self, page: None) -> None:
+		data = page.findAll("h2")
+		self.home_team = data[0].text
+		self.home_abb = data[1].text.split(" ")[0]
+		self.away_team = data[3].text
+		self.away_abb = data[4].text.split(" ")[0]
 
 	def jsonify(self) -> str:
 		return json.dumps(self, indent=4,cls=Encoder)
@@ -37,4 +50,10 @@ class Encoder(JSONEncoder):
 		return o.__dict__
 
 if __name__ == "__main__":
-	print(get_all_game_days())
+	for game in get_all_game_days():
+		one = Game(game)
+		print(one.jsonify())
+	
+	#one = Game(get_all_game_days()[0])
+	#print(one.jsonify())
+	#print(get_all_game_days())

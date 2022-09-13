@@ -18,7 +18,7 @@ The team class works to build an object that represents a team. The constructor 
 ```
 
 TODO in team.py:
- Get info for home stadium
+- Get info for home stadium
 
 ## game.py
 

@@ -24,11 +24,11 @@ class Game:
 		self.home_team = {"name": data[3].text, 
 						  "abb": data[4].text.split(" ")[0],
 						  "last_ten": ten[0],
-						  "pitcher": pitchers[0]}
+						  "pitcher": [pitchers[0], pitchers[2][0]]}
 		self.away_team = {"name": data[0].text, 
 		                  "abb": data[1].text.split(" ")[0],
 		                  "last_ten": ten[1],
-		                  "pitcher": pitchers[1]}
+		                  "pitcher": [pitchers[1], pitchers[2][1]]}
 
 	def get_last_ten(self, page: None) -> tuple:
 		data = page.findAll("td", text = "Last 10")
@@ -39,8 +39,21 @@ class Game:
 	def get_pitchers(self, page: None) -> tuple:
 		data = page.findAll("h2")
 
+		if len(data) != 18:
+			return (-1, -1)
+
+		home = data[5].text
+		away = data[2].text
+
+		eras = self.find_era(home, away)
+
 		#(home, away)
-		return (data[5].text.split(" (")[0], data[2].text.split(" (")[0])
+		return (home.split(" (")[0], away.split(" (")[0], eras)
+
+	def find_era(self, home: str, away: str) -> list:
+		#[home, away]
+		return [home.replace(")", ", ").split(", ")[4], away.replace(")", ", ").split(", ")[4]]
+		
 		
 	def jsonify(self) -> str:
 		return json.dumps(self, indent=4,cls=Encoder)
@@ -70,11 +83,11 @@ class Encoder(JSONEncoder):
 		return o.__dict__
 
 if __name__ == "__main__":
-	for game in get_all_game_days():
-		one = Game(game)
-		print(one.jsonify())
+	#for game in get_all_game_days():
+	#	one = Game(game)
+	#	print(one.jsonify())
 	
-	#one = Game(get_all_game_days()[0])
-	#print(one.jsonify())
+	one = Game(get_all_game_days()[0])
+	print(one.jsonify())
 
 	#print(get_all_game_days())

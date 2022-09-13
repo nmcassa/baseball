@@ -27,18 +27,24 @@ The game class currently only fetches the urls for all games then creates a basi
 ```json
 {
     "url": "/previews/2022/SFN202209130.shtml",
-    "home_team": "Atlanta Braves",
-    "home_abb": "ATL",
-    "away_team": "San Francisco Giants",
-    "away_abb": "SFG"
+    "home_team": {
+        "name": "San Francisco Giants",
+        "abb": "SFG",
+        "last_ten": "5-5",
+        "pitcher": "Jakob Junis"
+    },
+    "away_team": {
+        "name": "Atlanta Braves",
+        "abb": "ATL",
+        "last_ten": "7-3",
+        "pitcher": "Kyle Wright"
+    }
 }
 ```
 
 TODO in game.py:
 - grab statistics 
   - eras
-  - teams
   - stadium
   - RSA
-  - past 10 games
 - improve game object with those stats

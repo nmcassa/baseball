@@ -17,11 +17,31 @@ class Game:
 
 	def get_teams(self, page: None) -> None:
 		data = page.findAll("h2")
-		self.home_team = data[0].text
-		self.home_abb = data[1].text.split(" ")[0]
-		self.away_team = data[3].text
-		self.away_abb = data[4].text.split(" ")[0]
 
+		pitchers = self.get_pitchers(page)
+		ten = self.get_last_ten(page)
+
+		self.home_team = {"name": data[3].text, 
+						  "abb": data[4].text.split(" ")[0],
+						  "last_ten": ten[0],
+						  "pitcher": pitchers[0]}
+		self.away_team = {"name": data[0].text, 
+		                  "abb": data[1].text.split(" ")[0],
+		                  "last_ten": ten[1],
+		                  "pitcher": pitchers[1]}
+
+	def get_last_ten(self, page: None) -> tuple:
+		data = page.findAll("td", text = "Last 10")
+
+		#(home, away)
+		return (data[1].next_sibling.next_sibling.text, data[0].next_sibling.next_sibling.text)
+
+	def get_pitchers(self, page: None) -> tuple:
+		data = page.findAll("h2")
+
+		#(home, away)
+		return (data[5].text.split(" (")[0], data[2].text.split(" (")[0])
+		
 	def jsonify(self) -> str:
 		return json.dumps(self, indent=4,cls=Encoder)
 
@@ -56,4 +76,5 @@ if __name__ == "__main__":
 	
 	#one = Game(get_all_game_days()[0])
 	#print(one.jsonify())
+
 	#print(get_all_game_days())

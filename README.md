@@ -45,7 +45,8 @@ The game class currently only fetches the urls for all games then creates a basi
             "3.90"
         ]
     }
-}```
+}
+```
 
 TODO in game.py:
 - grab statistics 

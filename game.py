@@ -14,6 +14,7 @@ class Game:
 
 	def build(self, page: None) -> None:
 		self.get_teams(page)
+		self.get_data(page)
 
 	def get_teams(self, page: None) -> None:
 		data = page.findAll("h2")
@@ -24,11 +25,40 @@ class Game:
 		self.home_team = {"name": data[3].text, 
 						  "abb": data[4].text.split(" ")[0],
 						  "last_ten": ten[0],
-						  "pitcher": [pitchers[0], pitchers[2][0]]}
+						  "pitcher": {"name": pitchers[0], 
+						  			  "era": pitchers[2][0]}}
 		self.away_team = {"name": data[0].text, 
 		                  "abb": data[1].text.split(" ")[0],
 		                  "last_ten": ten[1],
-		                  "pitcher": [pitchers[1], pitchers[2][1]]}
+		                  "pitcher": {"name": pitchers[1], 
+		                  			  "era": pitchers[2][1]}}
+
+	def get_data(self, page: None) -> None:
+		data = page.findAll("div", {'class': ['table_wrapper']})
+
+		home = data[3].find("div", {'class': ['placeholder']}).next_sibling.next_sibling
+		home = BeautifulSoup(home, "html.parser")
+		home = home.findAll("td", {'data-stat': 'earned_run_avg'})
+
+		for item in home:
+			adult = item.parent.findChildren()[0].text
+			if "Last" in adult:
+				if "5" in adult:
+					self.home_team["pitcher"]["last_five_era"] = item.text
+				elif "7" in adult:
+					self.home_team["pitcher"]["last_seven_era"] = item.text
+
+		away = data[1].find("div", {'class': ['placeholder']}).next_sibling.next_sibling
+		away = BeautifulSoup(away, "html.parser")
+		away = away.findAll("td", {'data-stat': 'earned_run_avg'})
+
+		for item in away:
+			adult = item.parent.findChildren()[0].text
+			if "Last" in adult:
+				if "5" in adult:
+					self.away_team["pitcher"]["last_five_era"] = item.text
+				elif "7" in adult:
+					self.away_team["pitcher"]["last_seven_era"] = item.text
 
 	def get_last_ten(self, page: None) -> tuple:
 		data = page.findAll("td", text = "Last 10")
@@ -40,7 +70,7 @@ class Game:
 		data = page.findAll("h2")
 
 		if len(data) != 18:
-			return (-1, -1)
+			return (-1, -1, [-1, -1])
 
 		home = data[5].text
 		away = data[2].text
@@ -83,11 +113,11 @@ class Encoder(JSONEncoder):
 		return o.__dict__
 
 if __name__ == "__main__":
-	#for game in get_all_game_days():
-	#	one = Game(game)
-	#	print(one.jsonify())
+	for game in get_all_game_days():
+		one = Game(game)
+		print(one.jsonify())
 	
-	one = Game(get_all_game_days()[0])
-	print(one.jsonify())
+	#one = Game(get_all_game_days()[0])
+	#print(one.jsonify())
 
 	#print(get_all_game_days())

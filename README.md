@@ -26,24 +26,28 @@ The game class currently only fetches the urls for all games then creates a basi
 
 ```json
 {
-    "url": "/previews/2022/CIN202209131.shtml",
+    "url": "/previews/2022/TEX202209140.shtml",
     "home_team": {
-        "name": "Cincinnati Reds",
-        "abb": "CIN",
-        "last_ten": "5-5",
-        "pitcher": [
-            "Luis Cessa",
-            "4.97"
-        ]
+        "name": "Texas Rangers",
+        "abb": "TEX",
+        "last_ten": "4-6",
+        "pitcher": {
+            "name": "Dane Dunning",
+            "era": "4.39",
+            "last_seven_era": "4.62",
+            "last_five_era": "2.84"
+        }
     },
     "away_team": {
-        "name": "Pittsburgh Pirates",
-        "abb": "PIT",
-        "last_ten": "3-7",
-        "pitcher": [
-            "Johan Oviedo",
-            "3.90"
-        ]
+        "name": "Oakland Athletics",
+        "abb": "OAK",
+        "last_ten": "2-8",
+        "pitcher": {
+            "name": "JP Sears",
+            "era": "3.33",
+            "last_seven_era": "3.6",
+            "last_five_era": "0"
+        }
     }
 }
 ```
@@ -54,3 +58,14 @@ TODO in game.py:
   - stadium
   - RSA
 - improve game object with those stats
+
+
+### bug
+
+if no given pitcher for team. 
+
+```
+home = data[3].find("div", {'class': ['placeholder']}).next_sibling.next_sibling
+```
+
+just check for # of tables

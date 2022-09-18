@@ -40,25 +40,54 @@ class Game:
 		home = BeautifulSoup(home, "html.parser")
 		home = home.findAll("td", {'data-stat': 'earned_run_avg'})
 
+		self.home_team["pitcher"]["s_IP"] = {}
+		self.away_team["pitcher"]["s_IP"] = {}
+
+		self.home_team["pitcher"]["s_ER"] = {}
+		self.away_team["pitcher"]["s_ER"] = {}
+
+		self.home_team["pitcher"]["s_ER"]["seven"] = 0.0
+		self.home_team["pitcher"]["s_ER"]["five"] = 0.0
+		self.home_team["pitcher"]["s_IP"]["seven"] = 0.0
+		self.home_team["pitcher"]["s_IP"]["five"] = 0.0
+
+		self.away_team["pitcher"]["s_ER"]["seven"] = 0.0
+		self.away_team["pitcher"]["s_ER"]["five"] = 0.0
+		self.away_team["pitcher"]["s_IP"]["seven"] = 0.0
+		self.away_team["pitcher"]["s_IP"]["five"] = 0.0
+
+
 		for item in home:
-			adult = item.parent.findChildren()[0].text
-			if "Last" in adult:
-				if "5" in adult:
-					self.home_team["pitcher"]["last_five_era"] = item.text
-				elif "7" in adult:
-					self.home_team["pitcher"]["last_seven_era"] = item.text
+			adult = item.parent.findChildren()
+			if "Last" in adult[0].text:
+				if "5" in adult[0].text:
+					self.home_team["pitcher"]["s_IP"]["five"] = float(adult[3].text)
+					self.home_team["pitcher"]["s_ER"]["five"] = float(adult[6].text)
+				elif "7" in adult[0].text:
+					self.home_team["pitcher"]["s_IP"]["seven"] = float(adult[3].text)
+					self.home_team["pitcher"]["s_ER"]["seven"] = float(adult[6].text)
+
 
 		away = data[1].find("div", {'class': ['placeholder']}).next_sibling.next_sibling
 		away = BeautifulSoup(away, "html.parser")
 		away = away.findAll("td", {'data-stat': 'earned_run_avg'})
 
 		for item in away:
-			adult = item.parent.findChildren()[0].text
-			if "Last" in adult:
-				if "5" in adult:
-					self.away_team["pitcher"]["last_five_era"] = item.text
-				elif "7" in adult:
-					self.away_team["pitcher"]["last_seven_era"] = item.text
+			adult = item.parent.findChildren()
+			if "Last" in adult[0].text:
+				if "5" in adult[0].text:
+					self.away_team["pitcher"]["s_IP"]["five"] = float(adult[3].text)
+					self.away_team["pitcher"]["s_ER"]["five"] = float(adult[6].text)
+				elif "7" in adult[0].text:
+					self.away_team["pitcher"]["s_IP"]["seven"] = float(adult[3].text)
+					self.away_team["pitcher"]["s_ER"]["seven"] = float(adult[6].text)
+
+		self.home_team["pitcher"]["s_ERA"] =((self.home_team["pitcher"]["s_ER"]["five"] + 
+											self.home_team["pitcher"]["s_ER"]["seven"]) * 9) / (self.home_team["pitcher"]["s_IP"]["five"] + 
+											 self.home_team["pitcher"]["s_IP"]["seven"])
+		self.away_team["pitcher"]["s_ERA"] =((self.away_team["pitcher"]["s_ER"]["five"] + 
+											self.away_team["pitcher"]["s_ER"]["seven"]) * 9) / (self.away_team["pitcher"]["s_IP"]["five"] + 
+											 self.away_team["pitcher"]["s_IP"]["seven"])
 
 	def get_last_ten(self, page: None) -> tuple:
 		data = page.findAll("td", text = "Last 10")

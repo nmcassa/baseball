@@ -26,27 +26,41 @@ The game class currently only fetches the urls for all games then creates a basi
 
 ```json
 {
-    "url": "/previews/2022/TEX202209140.shtml",
+    "url": "/previews/2022/SFN202209180.shtml",
     "home_team": {
-        "name": "Texas Rangers",
-        "abb": "TEX",
+        "name": "San Francisco Giants",
+        "abb": "SFG",
         "last_ten": "4-6",
         "pitcher": {
-            "name": "Dane Dunning",
-            "era": "4.39",
-            "last_seven_era": "4.62",
-            "last_five_era": "2.84"
+            "name": "Alex Cobb",
+            "era": "3.48",
+            "s_IP": {
+                "seven": 41.0,
+                "five": 16.1
+            },
+            "s_ER": {
+                "seven": 10.0,
+                "five": 10.0
+            },
+            "s_ERA": 3.1523642732049035
         }
     },
     "away_team": {
-        "name": "Oakland Athletics",
-        "abb": "OAK",
-        "last_ten": "2-8",
+        "name": "Los Angeles Dodgers",
+        "abb": "LAD",
+        "last_ten": "8-2",
         "pitcher": {
-            "name": "JP Sears",
-            "era": "3.33",
-            "last_seven_era": "3.6",
-            "last_five_era": "0"
+            "name": "Andrew Heaney",
+            "era": "2.84",
+            "s_IP": {
+                "seven": 33.2,
+                "five": 26.0
+            },
+            "s_ER": {
+                "seven": 16.0,
+                "five": 20.0
+            },
+            "s_ERA": 5.472972972972973
         }
     }
 }
@@ -54,8 +68,6 @@ The game class currently only fetches the urls for all games then creates a basi
 
 TODO in game.py:
 - grab statistics 
-  - eras
-  - stadium
   - RSA
 - improve game object with those stats
 

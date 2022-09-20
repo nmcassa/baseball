@@ -15,6 +15,26 @@ class Game:
 	def build(self, page: None) -> None:
 		self.get_teams(page)
 		self.get_data(page)
+		self.get_avg_runs(page)
+
+	def get_avg_runs(self, page: None) -> None:
+		data = page.find("div", {"id": "group_1"})
+		data = data.find("h2").text
+		data = data.replace("(", ")").split(")")
+		data.remove(data[2])
+		data = data[1:len(data)-1]
+
+		self.away_team["RS/G"] = data[0].split(" ")[0]
+		self.home_team["RA/G"] = data[1].split(" ")[0]
+
+		data = page.find("div", {"id": "group_2"})
+		data = data.find("h2").text
+		data = data.replace("(", ")").split(")")
+		data.remove(data[2])
+		data = data[1:len(data)-1]
+
+		self.home_team["RS/G"] = data[0].split(" ")[0]
+		self.away_team["RA/G"] = data[1].split(" ")[0]
 
 	def get_teams(self, page: None) -> None:
 		data = page.findAll("h2")
@@ -24,11 +44,13 @@ class Game:
 
 		self.home_team = {"name": data[3].text, 
 						  "abb": data[4].text.split(" ")[0],
+						  "record": ten[2],
 						  "last_ten": ten[0],
 						  "pitcher": {"name": pitchers[0], 
 						  			  "era": pitchers[2][0]}}
 		self.away_team = {"name": data[0].text, 
 		                  "abb": data[1].text.split(" ")[0],
+		                  "record": ten[3],
 		                  "last_ten": ten[1],
 		                  "pitcher": {"name": pitchers[1], 
 		                  			  "era": pitchers[2][1]}}
@@ -91,9 +113,11 @@ class Game:
 
 	def get_last_ten(self, page: None) -> tuple:
 		data = page.findAll("td", text = "Last 10")
+		record = page.findAll("td", text = "Record")
 
 		#(home, away)
-		return (data[1].next_sibling.next_sibling.text, data[0].next_sibling.next_sibling.text)
+		return (data[1].next_sibling.next_sibling.text, data[0].next_sibling.next_sibling.text, 
+			record[1].next_sibling.next_sibling.text, record[0].next_sibling.next_sibling.text)
 
 	def get_pitchers(self, page: None) -> tuple:
 		data = page.findAll("h2")

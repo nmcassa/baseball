@@ -1,20 +1,27 @@
 from game import *
 
+one_weight = 50
 two_weight = 30
 
 def m_one(team) -> tuple:
-    sear = team['pitcher']['s_ERA']
-    ra = team["RA/G"]
+    era = float(team['pitcher']['era'])
+    ra = float(team["RA/G"])
+
+    return (ra - era, one_weight)
+
+def m_two(team) -> tuple:
+    rs = float(team['RS/G'])
+    ra = float(team['RA/G'])
+
+    return (rs - ra, two_weight)
+
+def m_three(team) -> tuple:
+    era = float(team['pitcher']['era'])
+    sera = float(team['pitcher']['s_ERA'])
 
     sip = team['pitcher']['s_IP']
 
-    return (float(ra) - sear, sip['five'] + sip['seven'] * (1.2))
-
-def m_two(team) -> tuple:
-    rs = team['RS/G']
-    ra = team['RA/G']
-
-    return (float(rs) - float(ra), two_weight)
+    return (era - sera, sip['five'] + sip['seven'] * (1.2))
 
 def algor(game: Game) -> tuple:
     #home team has a 8.11% advantage, given by historical data
@@ -34,7 +41,13 @@ def algor(game: Game) -> tuple:
     a_two = m_two(game.away_team)
     away += a_two[0] * a_two[1]
 
-    return ([game.home_team['name'], home], [game.away_team['name'], away])
+    h_three = m_three(game.home_team)
+    home += h_three[0] * h_three[1]
+
+    a_three = m_three(game.away_team)
+    away += a_three[0] * a_three[1]
+
+    return ([game.home_team['name'], round(home, 5)], [game.away_team['name'], round(away, 5)])
 
 def all_print(show_json: bool) -> None:
     for game in get_all_game_days():

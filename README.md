@@ -74,22 +74,20 @@ The game class currently only fetches the urls for all games then creates a basi
 
 ## algor.py
 
-going to contain the algorithms
-
 ```python
-(['Texas Rangers', 149.2277853372434], ['Los Angeles Angels', -129.1286])
-(['Kansas City Royals', -20.31413138686131], ['Minnesota Twins', -1.8470000000000093])
-(['Colorado Rockies', -52.50888900523555], ['San Francisco Giants', 37.941])
-(['Oakland Athletics', -121.73550695187166], ['Seattle Mariners', 102.3945614973262])
-(['San Diego Padres', 18.42407692307695], ['St. Louis Cardinals', 21.725457142857152])
-(['Pittsburgh Pirates', 17.816352313167236], ['Chicago Cubs', 3.9249999999999936])
-(['Cincinnati Reds', -37.2224625], ['Milwaukee Brewers', 103.92925149359888])
-(['Tampa Bay Rays', 8.291000000000004], ['Toronto Blue Jays', 16.384959550561813])
-(['Baltimore Orioles', 100.73500000000001], ['Houston Astros', 112.78365542168677])
-(['New York Yankees', 25.62965000000002], ['Boston Red Sox', 200.0978092485549])
-(['Philadelphia Phillies', 75.67269230769229], ['Atlanta Braves', 105.87469863013699])
-(['Chicago White Sox', 147.52309552238808], ['Cleveland Guardians', 165.72073669609082])
-(['Los Angeles Dodgers', 208.9107948717949], ['Arizona Diamondbacks', 254.71306294820724])
+(['Texas Rangers', 102.99279], ['Los Angeles Angels', -134.5134])
+(['Kansas City Royals', -20.48413], ['Minnesota Twins', -1.019])
+(['Colorado Rockies', -50.93149], ['San Francisco Giants', 98.029])
+(['Oakland Athletics', -127.87431], ['Seattle Mariners', 92.51616])
+(['San Diego Padres', -3.04592], ['St. Louis Cardinals', 14.55666])
+(['Pittsburgh Pirates', 3.47835], ['Chicago Cubs', 103.765])
+(['Cincinnati Reds', -37.39926], ['Milwaukee Brewers', 71.53885])
+(['Tampa Bay Rays', 54.691], ['Toronto Blue Jays', 38.31496])
+(['Baltimore Orioles', 105.955], ['Houston Astros', 78.81206])
+(['New York Yankees', 37.20105], ['Boston Red Sox', 139.12821])
+(['Philadelphia Phillies', 58.65269], ['Atlanta Braves', 66.6907])
+(['Chicago White Sox', 95.2095], ['Cleveland Guardians', 121.49254])
+(['Los Angeles Dodgers', 182.70279], ['Arizona Diamondbacks', 184.31606])
 ```
 
 ### bug

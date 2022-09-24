@@ -90,6 +90,26 @@ The game class currently only fetches the urls for all games then creates a basi
 (['Los Angeles Dodgers', 182.70279], ['Arizona Diamondbacks', 184.31606])
 ```
 
+### print_all_difference
+
+```python
+New York Yankees 112
+Philadelphia Phillies 38
+Oakland Athletics ND New York Mets
+Miami Marlins 103
+Toronto Blue Jays 56
+Chicago Cubs 60
+Cincinnati Reds 25
+Baltimore Orioles ND Houston Astros
+Cleveland Guardians 21
+Chicago White Sox 77
+Seattle Mariners 178
+Minnesota Twins 52
+Arizona Diamondbacks 31
+San Diego Padres 221
+Los Angeles Dodgers 41
+```
+
 ### bug
 
 if no given pitcher for team. 

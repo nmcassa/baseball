@@ -1,7 +1,8 @@
 from game import *
 
-one_weight = 50
+one_weight = 40
 two_weight = 30
+four_weight = 50
 
 def m_one(team) -> tuple:
     era = float(team['pitcher']['era'])
@@ -21,7 +22,16 @@ def m_three(team) -> tuple:
 
     sip = team['pitcher']['s_IP']
 
-    return (era - sera, sip['five'] + sip['seven'] * (1.2))
+    if sip['five'] + sip['seven'] < 20.0:
+        return ("F", "F")
+
+    return (era - sera, .6 * (sip['five'] + sip['seven'] * (1.2)))
+
+def m_four(team) -> tuple:
+    sera = float(team['pitcher']['s_ERA'])
+    ra = float(team["RA/G"])
+
+    return (ra - sera, four_weight)
 
 def algor(game: Game) -> tuple:
     #home team has a 8.11% advantage, given by historical data
@@ -42,6 +52,10 @@ def algor(game: Game) -> tuple:
     away += a_two[0] * a_two[1]
 
     h_three = m_three(game.home_team)
+
+    if h_three[0] == "F":
+        return ([game.home_team['name'], "Filter"], [game.away_team['name'], "Filter"])
+
     home += h_three[0] * h_three[1]
 
     a_three = m_three(game.away_team)
@@ -66,7 +80,19 @@ def one_print(show_json: bool) -> None:
 
     print(algor(one))
 
+def all_print_difference() -> None:
+    for game in get_all_game_days():
+        one = Game(game)
+        sol = algor(one)
+        if sol[0][1] == "Filter":
+            print("%s ND %s" % (sol[0][0], sol[1][0]))
+        else:
+            if sol[0][1] > sol[1][1]:
+                print("%s %d" % (sol[0][0], sol[0][1] - sol[1][1]))
+            else:
+                print("%s %d" % (sol[1][0], sol[1][1] - sol[0][1]))
+
 if __name__ == "__main__":
     #one_print(True)
-
-    all_print(False)
+    #all_print(False)
+    all_print_difference()

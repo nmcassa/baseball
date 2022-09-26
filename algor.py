@@ -82,7 +82,11 @@ def one_print(show_json: bool) -> None:
 
 def all_print_difference() -> None:
     for game in get_all_game_days():
-        one = Game(game)
+        try:
+            one = Game(game)
+        except:
+            print("%s ND %s" % (sol[0][0], sol[1][0]))
+            continue
         sol = algor(one)
         if sol[0][1] == "Filter":
             print("%s ND %s" % (sol[0][0], sol[1][0]))

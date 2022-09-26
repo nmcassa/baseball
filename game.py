@@ -104,12 +104,19 @@ class Game:
 					self.away_team["pitcher"]["s_IP"]["seven"] = float(adult[3].text)
 					self.away_team["pitcher"]["s_ER"]["seven"] = float(adult[6].text)
 
-		self.home_team["pitcher"]["s_ERA"] =((self.home_team["pitcher"]["s_ER"]["five"] + 
+		if (self.home_team["pitcher"]["s_IP"]["five"] + self.home_team["pitcher"]["s_IP"]["seven"]) == 0:
+			self.home_team["pitcher"]["s_ERA"] = 0
+		elif (self.away_team["pitcher"]["s_IP"]["five"] + self.away_team["pitcher"]["s_IP"]["seven"]) == 0:
+			self.away_team["pitcher"]["s_ERA"] = 0
+		else:
+			self.home_team["pitcher"]["s_ERA"] =((self.home_team["pitcher"]["s_ER"]["five"] + 
 											self.home_team["pitcher"]["s_ER"]["seven"]) * 9) / (self.home_team["pitcher"]["s_IP"]["five"] + 
 											 self.home_team["pitcher"]["s_IP"]["seven"])
-		self.away_team["pitcher"]["s_ERA"] =((self.away_team["pitcher"]["s_ER"]["five"] + 
+			self.away_team["pitcher"]["s_ERA"] =((self.away_team["pitcher"]["s_ER"]["five"] + 
 											self.away_team["pitcher"]["s_ER"]["seven"]) * 9) / (self.away_team["pitcher"]["s_IP"]["five"] + 
 											 self.away_team["pitcher"]["s_IP"]["seven"])
+
+		
 
 	def get_last_ten(self, page: None) -> tuple:
 		data = page.findAll("td", text = "Last 10")

@@ -109,15 +109,3 @@ Arizona Diamondbacks 31
 San Diego Padres 221
 Los Angeles Dodgers 41
 ```
-
-### bug
-
-if no given pitcher for team. 
-
-```
-home = data[3].find("div", {'class': ['placeholder']}).next_sibling.next_sibling
-```
-
-just check for # of tables
-
-haven't reproduced

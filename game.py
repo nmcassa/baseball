@@ -133,6 +133,7 @@ class Game:
 			return (-1, -1, [-1, -1])
 
 		home = data[5].text
+
 		away = data[2].text
 
 		eras = self.find_era(home, away)
@@ -141,8 +142,21 @@ class Game:
 		return (home.split(" (")[0], away.split(" (")[0], eras)
 
 	def find_era(self, home: str, away: str) -> list:
+		home = home.replace(")", ", ").split(", ")
+		away = away.replace(")", ", ").split(", ")
+
+		if home[4] == "":
+			home = home[3]
+		else:
+			home = home[4]
+
+		if away[4] == "":
+			away = away[3]
+		else:
+			away = away[4]
+
 		#[home, away]
-		return [home.replace(")", ", ").split(", ")[4], away.replace(")", ", ").split(", ")[4]]
+		return [home, away]
 		
 		
 	def jsonify(self) -> str:

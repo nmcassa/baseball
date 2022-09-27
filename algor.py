@@ -85,7 +85,7 @@ def all_print_difference() -> None:
         try:
             one = Game(game)
         except:
-            print("%s ND %s" % (sol[0][0], sol[1][0]))
+            print("ND")
             continue
         sol = algor(one)
         if sol[0][1] == "Filter":

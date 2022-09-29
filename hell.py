@@ -2,6 +2,7 @@ import re
 import requests
 
 from algor import *
+from direct import *
 
 from bs4 import BeautifulSoup
 
@@ -38,7 +39,7 @@ def build_urls() -> list:
 
 	return urls
 
-def algor_one_prob(winners: list, urls: list) -> float:
+def algor_one_prob(winners: list, urls: list, thresh: int) -> float:
 	win_count = 0
 	lose_count = 0
 	nd_count = 0
@@ -54,7 +55,7 @@ def algor_one_prob(winners: list, urls: list) -> float:
 			else:
 				dif = sol[1][1] - sol[0][1]
 				winner = sol[1][0]
-			if dif < 5:
+			if dif < thresh:
 				nd_count += 1
 			elif winner.replace(" ", "") == winners[i].replace(" ", ""):
 				win_count += 1
@@ -67,10 +68,31 @@ def algor_one_prob(winners: list, urls: list) -> float:
 
 	return (win_count / (win_count + lose_count))
 
-if __name__ == "__main__":
-	winners = build_winners()[1500:]
-	urls = build_urls()[1500:]
+def algor_direct_prob(winners: list, urls: list) -> float:
+	win_count = 0
+	lose_count = 0
+	nd_count = 0
 
-	print(algor_one_prob(winners, urls))
+	for i, game in enumerate(urls):
+		winner = ""
+		try:
+			winner = one_return_direct(game)
+			if winner.replace(" ", "") == winners[i].replace(" ", ""):
+				win_count += 1
+				print("%d %d %d" % (win_count, lose_count, win_count / (win_count + lose_count)*100))
+			else:
+				lose_count += 1
+				print("%d %d %d" % (win_count, lose_count, win_count / (win_count + lose_count)*100))
+		except:
+			nd_count += 1
+
+	return (win_count / (win_count + lose_count))
+
+if __name__ == "__main__":
+	winners = build_winners()[1250:]
+	urls = build_urls()[1250:]
+
+	#print(algor_one_prob(winners, urls, 5))
+	print(algor_direct_prob(winners, urls))
 
 	

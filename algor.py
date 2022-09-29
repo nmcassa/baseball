@@ -1,8 +1,8 @@
 from game import *
 
-one_weight = 40
-two_weight = 30
-four_weight = 50
+one_weight = 0
+two_weight = 50
+four_weight = 0
 
 def m_one(team) -> tuple:
     era = float(team['pitcher']['era'])
@@ -25,7 +25,8 @@ def m_three(team) -> tuple:
     if sip['five'] + sip['seven'] < 20.0:
         return ("F", "F")
 
-    return (era - sera, .6 * (sip['five'] + sip['seven'] * (1.2)))
+    #return (era - sera, .5 * (sip['five'] + sip['seven'] * (1.2)))
+    return (era - sera, 0)
 
 def m_four(team) -> tuple:
     sera = float(team['pitcher']['s_ERA'])
@@ -36,8 +37,8 @@ def m_four(team) -> tuple:
 def algor(game: Game) -> tuple:
     #home team has a 8.11% advantage, given by historical data
 
-    home = 8.11 / 2 
-    away = -8.11 / 2
+    home = 0
+    away = 0
 
     h_one = m_one(game.home_team)
     home += h_one[0] * h_one[1]
@@ -54,7 +55,8 @@ def algor(game: Game) -> tuple:
     h_three = m_three(game.home_team)
 
     if h_three[0] == "F":
-        return ([game.home_team['name'], "Filter"], [game.away_team['name'], "Filter"])
+        raise Exception("Filter")
+        #return ([game.home_team['name'], "Filter"], [game.away_team['name'], "Filter"])
 
     home += h_three[0] * h_three[1]
 
@@ -72,23 +74,29 @@ def all_print(show_json: bool) -> None:
 
         print(algor(one))
 
-def one_print(show_json: bool) -> None:
-    one = Game(get_all_game_days()[0])
+def one_print(game: Game, show_json: bool) -> None:
+    one = Game(game)
 
     if show_json:
         print(one.jsonify())
 
     print(algor(one))
 
-def all_print_difference() -> None:
-    for game in get_all_game_days():
+def one_return(game: Game, show_json: bool) -> None:
+    one = Game(game)
+
+    if show_json:
+        print(one.jsonify())
+
+    return algor(one)
+
+def all_print_difference(games: list) -> None:
+    for game in games:
         try:
             one = Game(game)
+            sol = algor(one)
         except:
-            print("ND")
             continue
-        sol = algor(one)
-        if sol[0][1] == "Filter":
             print("%s ND %s" % (sol[0][0], sol[1][0]))
         else:
             if sol[0][1] > sol[1][1]:
@@ -99,4 +107,4 @@ def all_print_difference() -> None:
 if __name__ == "__main__":
     #one_print(True)
     #all_print(False)
-    all_print_difference()
+    all_print_difference(get_all_game_days())

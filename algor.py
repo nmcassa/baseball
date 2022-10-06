@@ -1,8 +1,8 @@
 from game import *
 
-one_weight = 0
+one_weight = 10
 two_weight = 50
-four_weight = 0
+four_weight = 5
 
 def m_one(team) -> tuple:
     era = float(team['pitcher']['era'])

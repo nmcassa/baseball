@@ -89,8 +89,8 @@ def algor_direct_prob(winners: list, urls: list) -> float:
 	return (win_count / (win_count + lose_count))
 
 if __name__ == "__main__":
-	winners = build_winners()[1250:]
-	urls = build_urls()[1250:]
+	winners = build_winners()[1000:]
+	urls = build_urls()[1000:]
 
 	#print(algor_one_prob(winners, urls, 5))
 	print(algor_direct_prob(winners, urls))

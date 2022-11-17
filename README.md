@@ -91,20 +91,3 @@ Arizona Diamondbacks 31
 San Diego Padres 221
 Los Angeles Dodgers 41
 ```
-
-## team.py
-
-The team class works to build an object that represents a team. The constructor takes the abbreviation of a team and then creates this object ("ATL" represented in JSON) : 
-
-```json
-{
-    "abbreviation": "ATL",
-    "url": "https://www.baseball-reference.com/teams/ATL/2022.shtml",
-    "name": "Atlanta Braves",
-    "win_to_loss": 0.6214285714285714,
-    "home_vs_road": [
-        " .653",
-        " .588"
-    ]
-}
-```

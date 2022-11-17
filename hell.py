@@ -39,60 +39,16 @@ def build_urls() -> list:
 
 	return urls
 
-def algor_one_prob(winners: list, urls: list, thresh: int) -> float:
-	win_count = 0
-	lose_count = 0
-	nd_count = 0
-
-	for i, game in enumerate(urls):
-		winner = ""
-		dif = 0
-		try:
-			sol = one_return(game, False)
-			if sol[0][1] > sol[1][1]:
-				dif = sol[0][1] - sol[1][1]
-				winner = sol[0][0]
-			else:
-				dif = sol[1][1] - sol[0][1]
-				winner = sol[1][0]
-			if dif < thresh:
-				nd_count += 1
-			elif winner.replace(" ", "") == winners[i].replace(" ", ""):
-				win_count += 1
-				print("%d %d %d" % (win_count, lose_count, win_count / (win_count + lose_count)*100))
-			else:
-				lose_count += 1
-				print("%d %d %d" % (win_count, lose_count, win_count / (win_count + lose_count)*100))
-		except:
-			nd_count += 1
-
-	return (win_count / (win_count + lose_count))
-
-def algor_direct_prob(winners: list, urls: list) -> float:
-	win_count = 0
-	lose_count = 0
-	nd_count = 0
-
-	for i, game in enumerate(urls):
-		winner = ""
-		try:
-			winner = one_return_direct(game)
-			if winner.replace(" ", "") == winners[i].replace(" ", ""):
-				win_count += 1
-				print("%d %d %d" % (win_count, lose_count, win_count / (win_count + lose_count)*100))
-			else:
-				lose_count += 1
-				print("%d %d %d" % (win_count, lose_count, win_count / (win_count + lose_count)*100))
-		except:
-			nd_count += 1
-
-	return (win_count / (win_count + lose_count))
 
 if __name__ == "__main__":
 	winners = build_winners()[1000:]
 	urls = build_urls()[1000:]
 
+	a = Algor(10, 10, 10, 10)
+	print(urls[0])
+	one_print(a, urls[0], False)
+
 	#print(algor_one_prob(winners, urls, 5))
-	print(algor_direct_prob(winners, urls))
+	#print(algor_direct_prob(winners, urls))
 
 	

@@ -26,6 +26,18 @@ def build_winners() -> list:
 
 	return winners
 
+#thought about writing to avoid getting rate limited
+#but I still have to use the urls, therefore access the site a lot
+#so I guess it does not really help
+def write_winners():
+	wins = season.findAll("strong")
+	f = open("winners21.txt", "a")
+
+	for win in wins[2:len(wins) - 8]:
+		f.write(win.text.split("\n")[0].replace(" ", "") + "\n")
+
+	f.close()
+
 def build_urls() -> list:
 	games = season.findAll("em")
 
@@ -57,5 +69,19 @@ if __name__ == "__main__":
 	urls = build_urls()[1000:]
 
 	a = Algor(10, 10, 10, 10)
-	for i in range(0, 10):
-		print(is_correct(winners[i], one_return(a, urls[i])))
+	b = Algor(10, 20, 10, 20)
+	c = Algor(10, 30, 10, 5)
+
+	stuff = [a, b, c]
+	res = []
+	
+	for item in stuff:
+		count = 0
+		for i in range(0, 10):
+			if is_correct(winners[i], one_return(item, urls[i])) == 1:
+				count += 1
+
+		res.append(count)
+
+	print(res)
+

@@ -89,7 +89,7 @@ def one_print(algor, game: Game, show_json: bool) -> None:
 def one_return(algor, game: Game) -> None:
 	one = Game(game)
 
-	return algor(one)
+	return algor.algor(one)
 
 def all_print_difference(algor, games: list) -> None:
 	for game in games:

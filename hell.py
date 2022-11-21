@@ -39,15 +39,23 @@ def build_urls() -> list:
 
 	return urls
 
+def is_correct(true_win: str, picked_win: str):
+	print(true_win)
+	print(picked_win)
+	if true_win.replace(" ", "") == picked_win[0][0].replace(" ", ""):
+		return 1
+	else:
+		return 0
+
+#def find_best_ten(win: list, urls: list):
+
+
 
 if __name__ == "__main__":
-
 	#the winners and urls of all games in the 2021 season
 	winners = build_winners()[1000:]
 	urls = build_urls()[1000:]
 
-	#an algorithm with weights 10 10 10 10
 	a = Algor(10, 10, 10, 10)
-	b = Algor(20, 10, 20, 10)
-	one_print(a, urls[0], False)
-	one_print(b, urls[0], False)
+	for i in range(0, 10):
+		print(is_correct(winners[i], one_return(a, urls[i])))

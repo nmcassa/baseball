@@ -41,14 +41,13 @@ def build_urls() -> list:
 
 
 if __name__ == "__main__":
+
+	#the winners and urls of all games in the 2021 season
 	winners = build_winners()[1000:]
 	urls = build_urls()[1000:]
 
+	#an algorithm with weights 10 10 10 10
 	a = Algor(10, 10, 10, 10)
-	print(urls[0])
+	b = Algor(20, 10, 20, 10)
 	one_print(a, urls[0], False)
-
-	#print(algor_one_prob(winners, urls, 5))
-	#print(algor_direct_prob(winners, urls))
-
-	
+	one_print(b, urls[0], False)

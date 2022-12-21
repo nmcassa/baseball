@@ -1,6 +1,9 @@
 # baseball
 A python application that can gather data for games from previews as listed on baseball-reference.com with bs4.
 
+## stalled point
+Planning to run through some generations to try and figure out the correct values for my hyperparameters of each method. The website that I am scrapping from blocks you after some attempts so I can't do that right now. I guess I will copy the information I need into a huge text file and move from there, not sure.
+
 ## game.py
 
 The game class currently fetches the urls for all games on todays date and then creates a basic game object for each game that contains this:  

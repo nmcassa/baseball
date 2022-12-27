@@ -37,6 +37,14 @@ class Algor:
 
 		return (ra - sera, self.four)
 
+	def give_me(self, game: Game) -> list:
+		h_team = game.home_team
+		a_team = game.away_team
+		return [self.m_one(h_team)[0], self.m_two(h_team)[0], 
+			self.m_three(h_team)[0], self.m_four(h_team)[0], 
+			self.m_one(a_team)[0], self.m_two(a_team)[0], 
+			self.m_three(a_team)[0], self.m_four(a_team)[0]]
+
 	def algor(self, game: Game) -> tuple:
 		#home team has a 8.11% advantage, given by historical data
 
@@ -87,9 +95,11 @@ def one_print(algor, game: Game, show_json: bool) -> None:
 	print(algor.algor(one))
 
 def one_return(algor, game: Game) -> None:
-	one = Game(game)
-
-	return algor.algor(one)
+	try:
+		one = Game(game)
+		return algor.algor(one)
+	except:
+		return "None"
 
 def all_print_difference(algor, games: list) -> None:
 	for game in games:
@@ -112,3 +122,4 @@ if __name__ == "__main__":
 	#print(get_all_game_days())
 	#one_print(a, get_all_game_days()[0], False)
 	print("he")
+

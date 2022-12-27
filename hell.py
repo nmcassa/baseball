@@ -59,15 +59,14 @@ if __name__ == "__main__":
 	f = open("data21.txt", "a")
 
 	for cnt, game in enumerate(urls):
-		#try:
-		print(count)
-		one = Game(game)
-		attr = a.give_me(one)
-		for item in attr:
-			f.write(item + ",")
-		f.write(winners[cnt] + "\n")
-		#except:
-		#	print("skipped")
+		try:
+			one = Game(game)
+			attr = a.give_me(one)
+			for item in attr:
+				f.write(str(item) + ",")
+			f.write(str(winners[cnt]) + "\n")
+		except Exception as e:
+			print(e)
 
 	f.close()
 

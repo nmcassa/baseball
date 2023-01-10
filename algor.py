@@ -26,7 +26,7 @@ class Algor:
 		sip = team['pitcher']['s_IP']
 
 		if sip['five'] + sip['seven'] < 20.0:
-			return ("F", "F")
+			return (0, "F")
 
 		#return (era - sera, .5 * (sip['five'] + sip['seven'] * (1.2)))
 		return (era - sera, self.three)

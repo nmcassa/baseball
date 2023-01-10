@@ -1,5 +1,6 @@
 import re
 import requests
+import sys
 
 from algor import *
 from direct import *
@@ -55,18 +56,28 @@ if __name__ == "__main__":
 	urls = build_urls()[1000:]
 
 	a = Algor(0, 0, 0, 0)
+	#100
 
-	f = open("data21.txt", "a")
+	one = Game(urls[int(sys.argv[1])])
+	attr = a.give_me(one)
+	win = winners[int(sys.argv[1])]
+	print(attr)
+	print(win)
 
-	for cnt, game in enumerate(urls):
-		try:
-			one = Game(game)
-			attr = a.give_me(one)
-			for item in attr:
-				f.write(str(item) + ",")
-			f.write(str(winners[cnt]) + "\n")
-		except Exception as e:
-			print(e)
+	f = open("data21.csv", "a")
+
+	#for cnt, game in enumerate(urls):
+	#	try:
+	#		one = Game(game)
+	#		attr = a.give_me(one)
+	#		for item in attr:
+	#			f.write(str(item) + ",")
+	#		f.write(str(winners[cnt]) + "\n")
+	#	except Exception as e:
+	#		print(e)
+	for item in attr:
+		f.write(str(item) + ",")
+	f.write(str(win) + "\n")
 
 	f.close()
 

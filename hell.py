@@ -56,13 +56,14 @@ if __name__ == "__main__":
 	urls = build_urls()[1000:]
 
 	a = Algor(0, 0, 0, 0)
-	#100
+	#185
 
 	one = Game(urls[int(sys.argv[1])])
 	attr = a.give_me(one)
 	win = winners[int(sys.argv[1])]
-	print(len(attr))
+	print(attr)
 	print(win)
+
 
 	f = open("data21.csv", "a")
 

@@ -41,7 +41,7 @@ class Algor:
 		h_team = game.home_team
 		a_team = game.away_team
 		return [self.m_one(h_team)[0], self.m_two(h_team)[0], 
-			self.m_three(h_team)[0], self.m_four(h_team)[0], 
+			self.m_three(h_team)[0], self.m_four(h_team)[0],
 			self.m_one(a_team)[0], self.m_two(a_team)[0], 
 			self.m_three(a_team)[0], self.m_four(a_team)[0]]
 

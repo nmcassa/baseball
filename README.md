@@ -1,8 +1,8 @@
 # baseball
 A python application that can gather data for games from previews as listed on baseball-reference.com with bs4.
 
-## stalled point
-Planning to run through some generations to try and figure out the correct values for my hyperparameters of each method. The website that I am scrapping from blocks you after some attempts so I can't do that right now. I guess I will copy the information I need into a huge text file and move from there, not sure.
+## current workflow
+ Have a hacky way of getting data for each game/sample, but it takes a while because access to baseball-reference.com gets banned every so often. Currently exploring ways to use machine learning (sklearn) to evaluate this data. All of this is in explore.ipynb
 
 ## game.py
 

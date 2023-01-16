@@ -56,7 +56,7 @@ if __name__ == "__main__":
 	urls = build_urls()[1000:]
 
 	a = Algor(0, 0, 0, 0)
-	#665
+	#689
 
 	one = Game(urls[int(sys.argv[1])])
 	attr = a.give_me(one)

@@ -55,8 +55,9 @@ if __name__ == "__main__":
 	winners = build_winners()[1000:]
 	urls = build_urls()[1000:]
 
+	#end of 2021
+
 	a = Algor(0, 0, 0, 0)
-	#795
 
 	one = Game(urls[int(sys.argv[1])])
 	attr = a.give_me(one)

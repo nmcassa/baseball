@@ -58,24 +58,13 @@ if __name__ == "__main__":
 	winners = build_winners()[1000:]
 	urls = build_urls()[1000:]
 
-	#end of 2021
-
-	a = Algor(0, 0, 0, 0)
-
-	#one = Game(urls[int(sys.argv[1])])
-	#attr = a.give_me(one)
-	#win = winners[int(sys.argv[1])]
-	#print(attr)
-	#print(win)
-
-
 	f = open("data18.csv", "a")
 
 	for cnt, game in enumerate(urls):
 		time.sleep(2)
 		try:
 			one = Game(game)
-			attr = a.give_me(one)
+			attr = give_me_straight(one)
 			for item in attr:
 				f.write(str(item) + ",")
 			f.write(str(winners[cnt]) + "\n")

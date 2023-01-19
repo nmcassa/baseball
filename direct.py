@@ -93,6 +93,22 @@ def one_return_direct(game: Game) -> str:
 	except:
 		pass
 
+def give_me_straight(game: Game) -> list:
+	home = game.home_team
+	away = game.away_team
+
+	h_record_f = home['record'].split('-')
+	h_record = int(h_record_f[0]) / int(h_record_f[1])
+
+	a_record_f = away['record'].split('-')
+	a_record = int(a_record_f[0]) / int(a_record_f[1])
+
+	return [float(home['RS/G']), float(home['RA/G']),
+		 float(home['pitcher']['s_ERA']), h_record,
+		 float(home['pitcher']['era']), float(away['RS/G']), 
+		 float(away['RA/G']), float(away['pitcher']['s_ERA']), 
+		 a_record, float(away['pitcher']['era'])]
+
 if __name__ == "__main__":
 	#all_print(get_all_game_days())
 	print((one_return_direct(get_all_game_days()[0])))

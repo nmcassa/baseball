@@ -1,8 +1,8 @@
 # baseball
 A python application that can gather data for games from previews as listed on baseball-reference.com with bs4.
 
-## current workflow
- Have a hacky way of getting data for each game/sample, but it takes a while because access to baseball-reference.com gets banned every so often. Currently exploring ways to use machine learning (sklearn) to evaluate this data. All of this is in explore.ipynb
+## explore.ipynb
+ A jupyter notebook using sklearn models to work on predicting these games. The raw folder holds raw data from games, 'train.csv' has all data from seasons not in the testing set (data21.csv). Same for the og_algo folder. Data that is recieved from algor.py.
 
 ## game.py
 

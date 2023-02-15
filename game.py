@@ -40,7 +40,10 @@ class Game:
 		data = page.findAll("h2")
 
 		pitchers = self.get_pitchers(page)
-		ten = self.get_last_ten(page)
+		try:
+			ten = self.get_last_ten(page)
+		except:
+			ten = "None"
 
 		self.home_team = {"name": data[3].text, 
 						  "abb": data[4].text.split(" ")[0],

@@ -8,7 +8,7 @@ from direct import *
 
 from bs4 import BeautifulSoup
 
-season = get_parsed_page("https://www.baseball-reference.com/leagues/majors/2017-schedule.shtml")
+season = get_parsed_page("https://www.baseball-reference.com/leagues/majors/2015-schedule.shtml")
 
 def get_parsed_page(url: str) -> None:
 	headers = {
@@ -41,7 +41,7 @@ def build_urls() -> list:
 
 	for game in games:
 		try:
-			urls.append("/previews/2017/" + game.find("a")['href'][11:])
+			urls.append("/previews/2015/" + game.find("a")['href'][11:])
 		except:
 			pass
 
@@ -57,8 +57,13 @@ if __name__ == "__main__":
 	#the winners and urls of all games in the 2021 season
 	winners = build_winners()[1000:]
 	urls = build_urls()[1000:]
+	
+	one = Game(urls[100])
+	print(game)
 
-	f = open("raw/data17.csv", "a")
+	exit()
+
+	f = open("raw/data16.csv", "a")
 
 	for cnt, game in enumerate(urls):
 		time.sleep(2)
